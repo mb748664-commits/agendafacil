@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Serviço - AgendaFácil</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="cabecalho">
+
+    <div class="logo">
+        AgendaFácil
+    </div>
+
+    <nav>
+        <a href="/estabelecimento">Início</a>
+        <a href="/servicos">Meus serviços</a>
+        <a href="/logout">Sair</a>
+    </nav>
+
+</header>
+
+<main>
+
+    <section class="categorias">
+
+        <h1>✏️ Editar Serviço</h1>
+
+        <form method="POST">
+
+            <p>
+                <label>Nome do serviço:</label><br>
+
+                <input
+                    type="text"
+                    name="nome"
+                    value="{{ servico[1] }}"
+                    required
+                >
+            </p>
+
+            <p>
+                <label>Descrição:</label><br>
+
+                <textarea
+                    name="descricao"
+                    required
+                >{{ servico[2] }}</textarea>
+            </p>
+
+            <p>
+                <label>Duração em minutos:</label><br>
+
+                <input
+                    type="number"
+                    name="duracao"
+                    min="1"
+                    value="{{ servico[3] }}"
+                    required
+                >
+            </p>
+
+            <button type="submit">
+                💾 Salvar alterações
+            </button>
+
+        </form>
+
+        <br>
+
+        <a href="/servicos">
+            ⬅️ Voltar para Meus Serviços
+        </a>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>
+        © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+    </p>
+
+</footer>
+
+</body>
+
+</html>

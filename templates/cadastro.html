@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro - AgendaFácil</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/login">Entrar</a>
+            <a href="/login-estabelecimento">
+                Entrar como estabelecimento
+            </a>
+        </nav>
+
+    </header>
+
+
+    <main class="pagina-login">
+
+        <section class="card-login">
+
+            <div class="topo-login">
+
+                <h1>
+                    Cadastro
+                </h1>
+
+                <p>
+                    Crie sua conta no AgendaFácil.
+                </p>
+
+            </div>
+
+
+            <form method="POST">
+
+                <div class="campo-formulario">
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite seu nome"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="telefone">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="text"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="Digite seu telefone"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-login"
+                >
+                    Cadastrar
+                </button>
+
+            </form>
+
+
+            <div class="links-login">
+
+                <p>
+                    Já possui uma conta?
+
+                    <a href="/login">
+                        Entrar
+                    </a>
+                </p>
+
+                <a href="/">
+                    ← Voltar para o início
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

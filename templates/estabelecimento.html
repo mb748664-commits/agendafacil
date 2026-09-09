@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Área do Estabelecimento - AgendaFácil</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+            <a href="/estabelecimento">Início</a>
+            <a href="/servicos">Meus serviços</a>
+            <a href="/logout">Sair</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="principal area-estabelecimento-topo">
+
+            <div class="conteudo">
+
+                <p class="etiqueta-area">
+                    Área do estabelecimento
+                </p>
+
+                <h1>
+                    Olá, {{ nome }}! 👋
+                </h1>
+
+                <p>
+                    Bem-vindo à área do seu estabelecimento.
+                    Aqui você pode acompanhar os agendamentos
+                    realizados pelos seus clientes e administrar
+                    os serviços oferecidos.
+                </p>
+
+                <a href="/servicos"
+                   class="botao-principal">
+
+                    Administrar serviços
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <section class="categorias secao-agendamentos">
+
+            <h2>
+                📅 Agendamentos recebidos
+            </h2>
+
+            <p class="subtitulo-secao">
+                Acompanhe os agendamentos realizados pelos seus clientes.
+            </p>
+
+
+            {% if agendamentos %}
+
+                <div class="lista-agendamentos">
+
+                    {% for agendamento in agendamentos %}
+
+                        <div class="card-agendamento">
+
+                            <div class="cabecalho-agendamento">
+
+                                <h3>
+                                    👤 {{ agendamento[1] }}
+                                </h3>
+
+
+                                {% if agendamento[5] == "pendente" %}
+
+                                    <span class="status status-pendente">
+                                        Pendente
+                                    </span>
+
+
+                                {% elif agendamento[5] == "confirmado" %}
+
+                                    <span class="status status-confirmado">
+                                        Confirmado
+                                    </span>
+
+
+                                {% elif agendamento[5] == "cancelado" %}
+
+                                    <span class="status status-cancelado">
+                                        Cancelado
+                                    </span>
+
+
+                                {% else %}
+
+                                    <span class="status">
+                                        {{ agendamento[5] }}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="dados-agendamento">
+
+                                <p>
+                                    <strong>💇 Serviço:</strong>
+                                    {{ agendamento[2] }}
+                                </p>
+
+                                <p>
+                                    <strong>📅 Data:</strong>
+                                    {{ agendamento[3] }}
+                                </p>
+
+                                <p>
+                                    <strong>🕐 Horário:</strong>
+                                    {{ agendamento[4] }}
+                                </p>
+
+                            </div>
+
+
+                            {% if agendamento[5] == "pendente" %}
+
+                                <div class="mensagem-status mensagem-pendente">
+
+                                    ⏳ Este agendamento está aguardando sua confirmação.
+
+                                </div>
+
+
+                                <div class="acoes-agendamento">
+
+                                    <form
+                                        method="POST"
+                                        action="/confirmar-agendamento/{{ agendamento[0] }}"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="botao-confirmar"
+                                        >
+                                            ✅ Confirmar agendamento
+                                        </button>
+
+                                    </form>
+
+
+                                    <form
+                                        method="POST"
+                                        action="/cancelar-agendamento/{{ agendamento[0] }}"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="botao-cancelar"
+                                        >
+                                            ❌ Cancelar agendamento
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+
+                            {% elif agendamento[5] == "confirmado" %}
+
+                                <div class="mensagem-status mensagem-confirmado">
+
+                                    ✅ Este agendamento foi confirmado.
+
+                                </div>
+
+
+                            {% elif agendamento[5] == "cancelado" %}
+
+                                <div class="mensagem-status mensagem-cancelado">
+
+                                    ❌ Este agendamento foi cancelado.
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="estado-vazio">
+
+                    <p>
+                        Você ainda não possui agendamentos.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <section class="categorias">
+
+            <div class="card-administrar-servicos">
+
+                <div>
+
+                    <h2>
+                        ⚙️ Administrar serviços
+                    </h2>
+
+                    <p>
+                        Cadastre, edite e acompanhe os serviços
+                        oferecidos pelo seu estabelecimento.
+                    </p>
+
+                </div>
+
+                <a href="/servicos"
+                   class="botao-principal">
+
+                    Meus serviços
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

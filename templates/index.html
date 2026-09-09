@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgendaFácil</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+
+            <a href="/">
+                Início
+            </a>
+
+            <a href="/estabelecimentos">
+                Serviços
+            </a>
+
+            <a href="/estabelecimentos">
+                Estabelecimentos
+            </a>
+
+            <a href="/login">
+                Entrar como cliente
+            </a>
+
+            <a href="/login-estabelecimento">
+                Entrar como estabelecimento
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="principal">
+
+            <div class="conteudo">
+
+                <h1>
+                    Agende seu serviço
+                    <span>de forma fácil.</span>
+                </h1>
+
+                <p>
+                    Encontre estabelecimentos e profissionais,
+                    escolha o serviço e faça seu agendamento
+                    de maneira simples e rápida.
+                </p>
+
+
+                <div class="botoes">
+
+                    <a
+                        href="/estabelecimentos"
+                        class="botao-principal"
+                    >
+                        Encontrar serviços
+                    </a>
+
+
+                    <a
+                        href="/login-estabelecimento"
+                        class="botao-secundario"
+                    >
+                        Entrar como estabelecimento
+                    </a>
+
+
+                    <a
+                        href="/cadastro-estabelecimento"
+                        class="botao-secundario"
+                    >
+                        Cadastrar estabelecimento
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="categorias">
+
+            <h2>
+                Encontre o serviço que você precisa
+            </h2>
+
+
+            <div class="cards">
+
+
+                <div class="card">
+
+                    <div class="icone">
+                        💇
+                    </div>
+
+                    <h3>
+                        Cabeleireiro
+                    </h3>
+
+                    <p>
+                        Encontre profissionais e agende seu horário.
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <div class="icone">
+                        💅
+                    </div>
+
+                    <h3>
+                        Manicure
+                    </h3>
+
+                    <p>
+                        Escolha o profissional e o melhor horário.
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <div class="icone">
+                        🔧
+                    </div>
+
+                    <h3>
+                        Mecânico
+                    </h3>
+
+                    <p>
+                        Agende serviços para seu veículo.
+                    </p>
+
+                </div>
+
+
+
+                <div class="card">
+
+                    <div class="icone">
+                        🐶
+                    </div>
+
+                    <h3>
+                        Pet Shop
+                    </h3>
+
+                    <p>
+                        Agende banho, tosa e outros serviços.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estabelecimentos - AgendaFácil</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+            <a href="/usuario">Início</a>
+            <a href="/estabelecimentos">Estabelecimentos</a>
+            <a href="/logout">Sair</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="principal">
+
+            <div class="conteudo">
+
+                <h1>
+                    Encontre um estabelecimento
+                </h1>
+
+                <p>
+                    Escolha um estabelecimento para ver os serviços disponíveis.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="categorias">
+
+            {% if estabelecimentos %}
+
+                <div class="cards">
+
+                    {% for estabelecimento in estabelecimentos %}
+
+                        <div class="card">
+
+                            <h2>
+                                {{ estabelecimento[1] }}
+                            </h2>
+
+                            <p>
+                                {{ estabelecimento[5] }}
+                            </p>
+
+                            <p>
+                                📞 {{ estabelecimento[3] }}
+                            </p>
+
+                            <p>
+                                📍 {{ estabelecimento[4] }}
+                            </p>
+
+                            <br>
+
+                            <a href="/servicos-estabelecimento/{{ estabelecimento[0] }}"
+                               class="botao-principal">
+                                Ver serviços
+                            </a>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p>
+                    Nenhum estabelecimento cadastrado.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

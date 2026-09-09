@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Área do usuário - AgendaFácil</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+            <a href="/usuario">Início</a>
+            <a href="/estabelecimentos">Estabelecimentos</a>
+            <a href="/logout">Sair</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="principal area-usuario-topo">
+
+            <div class="conteudo">
+
+                <p class="etiqueta-area">
+                    Área do cliente
+                </p>
+
+                <h1>
+                    Olá, {{ nome }}! 👋
+                </h1>
+
+                <p>
+                    Bem-vindo ao AgendaFácil.
+                    Encontre estabelecimentos, escolha serviços
+                    e acompanhe seus agendamentos em um só lugar.
+                </p>
+
+                <a href="/estabelecimentos"
+                   class="botao-principal">
+
+                    Encontrar serviços
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <section class="categorias">
+
+            <h2>
+                Encontre um serviço
+            </h2>
+
+            <p class="subtitulo-secao">
+                Escolha uma categoria e encontre o serviço que precisa.
+            </p>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="icone">
+                        💇
+                    </div>
+
+                    <h3>
+                        Cabeleireiro
+                    </h3>
+
+                    <p>
+                        Encontre profissionais e agende seu horário.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icone">
+                        💅
+                    </div>
+
+                    <h3>
+                        Manicure
+                    </h3>
+
+                    <p>
+                        Escolha um serviço e faça seu agendamento.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icone">
+                        🔧
+                    </div>
+
+                    <h3>
+                        Mecânico
+                    </h3>
+
+                    <p>
+                        Agende serviços para seu veículo.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icone">
+                        🐶
+                    </div>
+
+                    <h3>
+                        Pet Shop
+                    </h3>
+
+                    <p>
+                        Encontre serviços para seu animal.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="categorias secao-agendamentos">
+
+            <h2>
+                📅 Meus agendamentos
+            </h2>
+
+            <p class="subtitulo-secao">
+                Acompanhe os horários que você marcou.
+            </p>
+
+
+            {% if agendamentos %}
+
+                <div class="lista-agendamentos">
+
+                    {% for agendamento in agendamentos %}
+
+                        <div class="card-agendamento">
+
+                            <div class="cabecalho-agendamento">
+
+                                <h3>
+                                    🏪 {{ agendamento[1] }}
+                                </h3>
+
+
+                                {% if agendamento[5] == "pendente" %}
+
+                                    <span class="status status-pendente">
+                                        Pendente
+                                    </span>
+
+
+                                {% elif agendamento[5] == "confirmado" %}
+
+                                    <span class="status status-confirmado">
+                                        Confirmado
+                                    </span>
+
+
+                                {% elif agendamento[5] == "cancelado" %}
+
+                                    <span class="status status-cancelado">
+                                        Cancelado
+                                    </span>
+
+
+                                {% else %}
+
+                                    <span class="status">
+                                        {{ agendamento[5] }}
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="dados-agendamento">
+
+                                <p>
+                                    <strong>💇 Serviço:</strong>
+                                    {{ agendamento[2] }}
+                                </p>
+
+                                <p>
+                                    <strong>📅 Data:</strong>
+                                    {{ agendamento[3] }}
+                                </p>
+
+                                <p>
+                                    <strong>🕐 Horário:</strong>
+                                    {{ agendamento[4] }}
+                                </p>
+
+                            </div>
+
+
+                            {% if agendamento[5] == "pendente" %}
+
+                                <div class="mensagem-status mensagem-pendente">
+
+                                    ⏳ Seu agendamento está aguardando
+                                    confirmação do estabelecimento.
+
+                                </div>
+
+
+                            {% elif agendamento[5] == "confirmado" %}
+
+                                <div class="mensagem-status mensagem-confirmado">
+
+                                    ✅ Seu agendamento foi confirmado
+                                    pelo estabelecimento.
+
+                                </div>
+
+
+                            {% elif agendamento[5] == "cancelado" %}
+
+                                <div class="mensagem-status mensagem-cancelado">
+
+                                    ❌ Este agendamento foi cancelado.
+
+                                </div>
+
+                            {% endif %}
+
+
+                            {% if agendamento[5] == "pendente"
+                                  or agendamento[5] == "confirmado" %}
+
+                                <form
+                                    class="form-cancelar"
+                                    method="POST"
+                                    action="/cancelar-meu-agendamento/{{ agendamento[0] }}"
+                                    onsubmit="return confirm('Tem certeza que deseja cancelar este agendamento?');"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="botao-cancelar"
+                                    >
+
+                                        ❌ Cancelar agendamento
+
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="estado-vazio">
+
+                    <p>
+                        Você ainda não possui agendamentos.
+                    </p>
+
+                    <a href="/estabelecimentos"
+                       class="botao-principal">
+
+                        Encontrar serviços
+
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil -
+            Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

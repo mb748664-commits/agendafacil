@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Agendar serviço - AgendaFácil
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         CABEÇALHO
+    =========================================== -->
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+
+        <nav>
+
+            <a href="/usuario">
+                Início
+            </a>
+
+            <a href="/estabelecimentos">
+                Estabelecimentos
+            </a>
+
+            <a href="/logout">
+                Sair
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         CONTEÚDO
+    =========================================== -->
+
+    <main>
+
+
+        <!-- INFORMAÇÕES DO SERVIÇO -->
+
+        <section class="principal">
+
+            <div class="conteudo">
+
+                <h1>
+                    Agendar serviço
+                </h1>
+
+
+                <h2>
+                    {{ servico[1] }}
+                </h2>
+
+
+                <p>
+                    {{ servico[2] }}
+                </p>
+
+
+                <p>
+                    ⏱️ Duração:
+                    {{ servico[3] }}
+                    minutos
+                </p>
+
+
+                <p>
+                    🏪 Estabelecimento:
+                    {{ estabelecimento[1] }}
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             ESCOLHER DATA
+        =========================================== -->
+
+        <section class="categorias">
+
+            <h2>
+                📅 Escolha a data
+            </h2>
+
+
+            <form method="GET">
+
+                <label for="data">
+
+                    Data:
+
+                </label>
+
+
+                <br><br>
+
+
+                <input
+                    type="date"
+                    id="data"
+                    name="data"
+                    value="{{ data_selecionada or '' }}"
+                    required
+                >
+
+
+                <br><br>
+
+
+                <button type="submit">
+
+                    Ver horários
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ==========================================
+             HORÁRIOS
+        =========================================== -->
+
+        {% if data_selecionada %}
+
+
+        <section class="categorias">
+
+
+            <h2>
+                🕐 Horários
+            </h2>
+
+
+            <p>
+
+                Escolha um horário disponível:
+
+            </p>
+
+
+
+            <div class="cards">
+
+
+                {% for horario in horarios %}
+
+
+                    {% if horario in horarios_ocupados %}
+
+
+                        <!-- HORÁRIO OCUPADO -->
+
+                        <div class="card">
+
+                            <div class="icone">
+                                🔴
+                            </div>
+
+
+                            <h3>
+                                {{ horario }}
+                            </h3>
+
+
+                            <p>
+                                Horário ocupado
+                            </p>
+
+                        </div>
+
+
+                    {% else %}
+
+
+                        <!-- HORÁRIO DISPONÍVEL -->
+
+                        <div class="card">
+
+                            <div class="icone">
+                                🟢
+                            </div>
+
+
+                            <h3>
+                                {{ horario }}
+                            </h3>
+
+
+                            <form method="POST">
+
+
+                                <input
+                                    type="hidden"
+                                    name="data"
+                                    value="{{ data_selecionada }}"
+                                >
+
+
+                                <input
+                                    type="hidden"
+                                    name="horario"
+                                    value="{{ horario }}"
+                                >
+
+
+                                <button type="submit">
+
+                                    Agendar {{ horario }}
+
+                                </button>
+
+
+                            </form>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </section>
+
+
+        {% endif %}
+
+
+
+        <!-- ==========================================
+             MENSAGEM DE HORÁRIO OCUPADO
+        =========================================== -->
+
+        {% if horario_ocupado %}
+
+
+        <section class="categorias">
+
+
+            <h2>
+                ⚠️ Horário indisponível!
+            </h2>
+
+
+            <p>
+
+                O horário
+
+                <strong>
+                    {{ horario_ocupado }}
+                </strong>
+
+                já foi agendado.
+
+            </p>
+
+
+            <p>
+
+                Escolha outro horário.
+
+            </p>
+
+
+        </section>
+
+
+        {% endif %}
+
+
+    </main>
+
+
+
+    <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+
+    <footer>
+
+        <p>
+
+            © 2026 AgendaFácil -
+            Plataforma gratuita de agendamento.
+
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

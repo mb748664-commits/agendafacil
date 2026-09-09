@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login do Estabelecimento - AgendaFácil</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/login">Entrar como cliente</a>
+        </nav>
+
+    </header>
+
+
+    <main class="pagina-login">
+
+        <section class="card-login">
+
+            <div class="topo-login">
+
+                <h1>
+                    Login do Estabelecimento
+                </h1>
+
+                <p>
+                    Entre na conta do seu estabelecimento.
+                </p>
+
+            </div>
+
+
+            <form method="POST">
+
+                <div class="campo-formulario">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-formulario">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-login"
+                >
+                    Entrar
+                </button>
+
+            </form>
+
+
+            <div class="links-login">
+
+                <p>
+                    Ainda não possui cadastro?
+
+                    <a href="/cadastro-estabelecimento">
+                        Cadastrar estabelecimento
+                    </a>
+                </p>
+
+                <a href="/">
+                    ← Voltar para o início
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Serviços - AgendaFácil</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+            <a href="/usuario">Início</a>
+            <a href="/estabelecimentos">Estabelecimentos</a>
+            <a href="/logout">Sair</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="principal">
+
+            <h1>{{ estabelecimento[1] }}</h1>
+
+            <p>
+                {{ estabelecimento[5] }}
+            </p>
+
+            <p>
+                📍 {{ estabelecimento[4] }}
+            </p>
+
+            <p>
+                📞 {{ estabelecimento[3] }}
+            </p>
+
+        </section>
+
+
+        <section class="categorias">
+
+            <h2>Serviços disponíveis</h2>
+
+            {% if servicos %}
+
+                <div class="cards">
+
+                    {% for servico in servicos %}
+
+                        <div class="card">
+
+                            <h3>
+                                {{ servico[1] }}
+                            </h3>
+
+                            <p>
+                                {{ servico[2] }}
+                            </p>
+
+                            <p>
+                                ⏱️ Duração: {{ servico[3] }} minutos
+                            </p>
+
+                            <br>
+
+                            <a href="/agendar/{{ servico[0] }}">
+                                Agendar
+                            </a>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p>
+                    Este estabelecimento ainda não possui serviços cadastrados.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

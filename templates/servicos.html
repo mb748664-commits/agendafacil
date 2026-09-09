@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meus Serviços - AgendaFácil</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+
+        <div class="logo">
+            AgendaFácil
+        </div>
+
+        <nav>
+            <a href="/estabelecimento">Início</a>
+            <a href="/logout">Sair</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="principal">
+
+            <div class="conteudo">
+
+                <h1>Meus Serviços</h1>
+
+                <p>
+                    Cadastre os serviços que seu estabelecimento oferece.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="categorias">
+
+            <h2>Cadastrar novo serviço</h2>
+
+            <form method="POST">
+
+                <label>Nome do serviço:</label>
+                <br>
+
+                <input type="text" name="nome" required>
+
+                <br><br>
+
+                <label>Descrição:</label>
+                <br>
+
+                <textarea name="descricao" rows="4"></textarea>
+
+                <br><br>
+
+                <label>Duração em minutos:</label>
+                <br>
+
+                <input type="number" name="duracao" required>
+
+                <br><br>
+
+                <button type="submit">
+                    Cadastrar serviço
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="categorias">
+
+            <h2>Serviços cadastrados</h2>
+
+            {% if servicos %}
+
+                <div class="cards">
+
+                    {% for servico in servicos %}
+
+                        <div class="card">
+
+                            <h3>{{ servico[1] }}</h3>
+
+                            <p>
+                                {{ servico[2] }}
+                            </p>
+
+                            <p>
+                                Duração: {{ servico[3] }} minutos
+                            </p>
+
+                            <br>
+
+                            <a href="/editar-servico/{{ servico[0] }}">
+                                <button type="button">
+                                    ✏️ Editar
+                                </button>
+                            </a>
+
+                            <br><br>
+
+                            <form method="POST"
+                                  action="/excluir-servico/{{ servico[0] }}"
+                                  onsubmit="return confirm('Tem certeza que deseja excluir este serviço?');">
+
+                                <button type="submit">
+                                    🗑️ Excluir
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <p>
+                    Nenhum serviço cadastrado ainda.
+                </p>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 AgendaFácil - Plataforma gratuita de agendamento.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
